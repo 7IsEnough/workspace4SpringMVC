@@ -16,5 +16,11 @@
   <h1>RequestMapping测试</h1>
   <a href="handle01">test01-写在方法上的requestMapping</a><br/>
   <a href="haha/handle01">test01-写在方法上的requestMapping</a>
+  <h1>测试RequestMapping的属性</h1>
+  <a href="haha/handle02">handle02</a><br/>
+  <form action="haha/handle02" method="post">
+    <input type="submit">
+  </form>
+  <a href="haha/handle03">handle03-测试params</a><br/>
   </body>
 </html>

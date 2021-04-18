@@ -37,7 +37,7 @@ public class HelloController {
         return "success";
     }
 
-    @RequestMapping("/hello")
+    @RequestMapping("/handle01")
     public String handle01() {
     System.out.println("handle01...");
         return "error";
