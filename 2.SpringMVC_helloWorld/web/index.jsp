@@ -13,5 +13,8 @@
   <body>
   <!--以前一个servlet：这个servlet配置一个url-pattern(/hello)-->
   <a href="hello">你好</a>
+  <h1>RequestMapping测试</h1>
+  <a href="handle01">test01-写在方法上的requestMapping</a><br/>
+  <a href="haha/handle01">test01-写在方法上的requestMapping</a>
   </body>
 </html>
