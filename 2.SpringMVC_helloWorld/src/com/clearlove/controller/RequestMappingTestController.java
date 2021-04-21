@@ -45,7 +45,8 @@ public class RequestMappingTestController {
    *      eg: params = {"username!=123", "pwd", "!age"}
    *        请求参数必须满足以上规则：
    *        请求的username不能是123，必须有pwd的值，不能有age
-   * headers:
+   *
+   * headers: 规定请求头；也和param一样能写简单的表达式
    * consumes:
    * produces:
    */
@@ -58,6 +59,26 @@ public class RequestMappingTestController {
   @RequestMapping(value = "/handle03", params = {"username!=123", "pwd", "!age"})
   public String handle03() {
     System.out.println("handle03...");
+    return "success";
+  }
+
+  /**
+   * User-agent: 浏览器信息； 让谷歌能访问，IE不能访问
+   *
+   * <p>谷歌：User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like
+   * Gecko) Chrome/89.0.4389.82 Safari/537.36
+   *
+   * <p>IE：User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko
+   *
+   * @return
+   */
+  @RequestMapping(
+      value = "/handle04",
+      headers = {
+        "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36"
+      })
+  public String handle04() {
+    System.out.println("handle04..");
     return "success";
   }
 }

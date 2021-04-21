@@ -22,5 +22,6 @@
     <input type="submit">
   </form>
   <a href="haha/handle03">handle03-测试params</a><br/>
+  <a href="haha/handle04">handle04-测试headers</a><br/>
   </body>
 </html>
