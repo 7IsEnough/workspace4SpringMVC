@@ -47,8 +47,11 @@ public class RequestMappingTestController {
    *        请求的username不能是123，必须有pwd的值，不能有age
    *
    * headers: 规定请求头；也和param一样能写简单的表达式
-   * consumes:
-   * produces:
+   *
+   *
+   * consumes: 只接收内容类型是哪种的请求，规定请求头中的Content-Type
+   *
+   * produces: 告诉浏览器返回的内容类型是什么，给响应头中加上Content-Type:text/html;charset=utf-8
    */
   @RequestMapping(value = "/handle02", method = RequestMethod.POST)
   public String handle02() {
