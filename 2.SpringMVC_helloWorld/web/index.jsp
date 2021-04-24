@@ -26,5 +26,6 @@
   <hr/>
   <h1>RequestMapping-Ant风格的URL</h1>
   <a href="antTest01">精确请求地址-antTest01</a><br/>
+  <a href="user/admin">测试PathVariable</a><br/>
   </body>
 </html>

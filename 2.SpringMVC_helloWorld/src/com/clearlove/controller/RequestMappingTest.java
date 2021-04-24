@@ -1,6 +1,7 @@
 package com.clearlove.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -60,6 +61,15 @@ public class RequestMappingTest {
   @RequestMapping("/a/**/antTest0*")
   public String antTest05() {
     System.out.println("antTest05...");
+    return "success";
+  }
+
+  // 路径上可以有占位符：占位符语法就是可以在任意路径的地方写一个{变量名}
+  //  /user/admin  /user/promise
+  // 路径上的占位符只能占一层路径
+  @RequestMapping("/user/{id}")
+  public String pathVariableTest(@PathVariable("id") String id) {
+    System.out.println("路径上的占位符的值" + id);
     return "success";
   }
 
