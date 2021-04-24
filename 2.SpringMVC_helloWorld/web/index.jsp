@@ -23,5 +23,8 @@
   </form>
   <a href="haha/handle03">handle03-测试params</a><br/>
   <a href="haha/handle04">handle04-测试headers</a><br/>
+  <hr/>
+  <h1>RequestMapping-Ant风格的URL</h1>
+  <a href="antTest01">精确请求地址-antTest01</a><br/>
   </body>
 </html>
