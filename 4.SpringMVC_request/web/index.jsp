@@ -12,5 +12,6 @@
   </head>
   <body>
     <a href="hello">hello</a>
+    <a href="handle01?username=tomcat">handle01</a>
   </body>
 </html>
