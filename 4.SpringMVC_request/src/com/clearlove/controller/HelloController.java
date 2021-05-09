@@ -1,5 +1,13 @@
 package com.clearlove.controller;
 
+import com.clearlove.book.Book;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import javax.servlet.ServletInputStream;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -71,6 +79,45 @@ public class HelloController {
     System.out.println("这个变量的值：" + username);
     System.out.println("请求头中浏览器的信息：" + userAgent);
     System.out.println("cookie中的jid的值：" + jid);
+    return "success";
+  }
+
+  /**
+   * 如果我们的请求是一个POJO
+   * SpringMVC会自动的为这个POJO赋值
+   * 1. 将POJO中的每一个属性，从request参数中尝试获取出来，并封装即可
+   * 2. 还可以级联封装：属性的属性
+   * @param book
+   * @return
+   */
+  @RequestMapping("/book")
+  public String addBook(Book book) {
+    System.out.println("我要保存的图书：" + book);
+    return "success";
+  }
+
+  /**
+   * SpringMVC可以直接在参数上写原生API
+   *
+   * HttpServletRequest
+   * HttpServletResponse
+   * HttpSession
+   *
+   * java.security.Principal: https安全协议有关的
+   * Locale：国际化有关的区域信息对象
+   * InputStream
+   *        ServletInputStream inputStream = request.getInputStream();
+   * OutputStream
+   *        ServletOutputStream outputStream = response.getOutputStream();
+   * Reader
+   *        BufferedReader reader = request.getReader();
+   * Writer
+   *        PrintWriter writer = response.getWriter();
+   */
+  @RequestMapping("/handle03")
+  public String handle03(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+    request.setAttribute("reqParam", "我是请求域中的");
+    session.setAttribute("sessionParam", "我是session域中的");
     return "success";
   }
 
