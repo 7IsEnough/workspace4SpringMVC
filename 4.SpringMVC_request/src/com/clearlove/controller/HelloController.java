@@ -87,6 +87,17 @@ public class HelloController {
    * SpringMVC会自动的为这个POJO赋值
    * 1. 将POJO中的每一个属性，从request参数中尝试获取出来，并封装即可
    * 2. 还可以级联封装：属性的属性
+   * 3. 请求参数的参数名和对象中的属性名一一对应就行
+   *
+   * 提交的数据可能有乱码
+   * 请求乱码
+   *    GET请求：改server.xml；在8080端口处URIEncoding="UTF-8"
+   *    POST请求：
+   *        在第一次获取请求参数之前设置
+   *        request.setCharacterEncoding("UTF-8");
+   *        自己写一个filter; SpringMVC有这个filter
+   * 响应乱码
+   *    response.setContentType("text/html;charset=utf-8");
    * @param book
    * @return
    */
