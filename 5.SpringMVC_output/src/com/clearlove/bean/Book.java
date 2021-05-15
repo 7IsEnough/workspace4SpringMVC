@@ -13,6 +13,19 @@ public class Book {
   private Integer sales;
   private Double price;
 
+  public Book() {
+  }
+
+  public Book(Integer id, String bookName, String author, Integer stock, Integer sales,
+      Double price) {
+    this.id = id;
+    this.bookName = bookName;
+    this.author = author;
+    this.stock = stock;
+    this.sales = sales;
+    this.price = price;
+  }
+
   public Double getPrice() {
     return price;
   }

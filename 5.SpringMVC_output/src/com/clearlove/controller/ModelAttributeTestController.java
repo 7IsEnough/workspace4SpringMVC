@@ -1,7 +1,10 @@
 package com.clearlove.controller;
 
 import com.clearlove.bean.Book;
+import java.util.Map;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -50,8 +53,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ModelAttributeTestController {
 
+
+  private Object o1;
+  private Object o2;
+
+  private Object b1;
+  private Object b2;
+
+  /**
+   * 可以告诉SpringMVC不要new这个book对象
+   * 使用从数据库查询出并保存的book对象
+   *
+   * 同都是BindingAwareModelMap
+   * @param book
+   * @return
+   */
   @RequestMapping("/updateBook")
-  public String updateBook(Book book) {
+  public String updateBook(@ModelAttribute("book") Book book, Map<String, Object> model) {
+    o2 = model;
+    b2 = book;
+    Object object = model.get("book");
+    //    System.out.println("传入的model：" + model.getClass());
+    System.out.println("o1==o2?" + (o1==o2));
+    System.out.println("b1==b2?" + (b1==b2) + "-->" +(b2 == object));
     System.out.println("页面要提交过来的图书信息：" + book);
     // bookDao.update(book);
 //    id=100, bookName='null', author='张三', stock=12, sales=32, price=98.98
@@ -61,6 +85,30 @@ public class ModelAttributeTestController {
 //                  sales=?, stock=?, img_path=?
 //                  where id=?";
     return "success";
+  }
+
+  /**
+   * 1.SpringMVC要封装请求参数的Book对象不应该是自己new出来的
+   *    而应该是从【数据库中】拿到的准备好的对象
+   * 2.再来使用这个对象封装请求参数
+   *
+   * @ModelAttribute
+   *    参数：取出刚才保存的数据
+   *    方法位置：这个方法就会提前于目标方法先运行
+   *        1) 我们可以在这里提前查出数据库中图书的信息
+   *        2) 将这个图书信息保存起来(方便下一个方法还能使用)
+   *
+   * 参数的map：BindingAwareModelMap
+   *
+   */
+  @ModelAttribute
+  public void hahaMyModelAttribute(Map<String, Object> map) {
+    Book book = new Book(100, "西游记", "吴承恩", 98, 10, 98.98);
+    System.out.println("数据库中查到的信息是：" + book);
+    map.put("book", book);
+    b1 = book;
+    o1 = map;
+    System.out.println("modelAttribute方法。。。查询了图书并保存了...使用map的类型：" + map.getClass());
   }
 
 }
