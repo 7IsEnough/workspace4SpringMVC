@@ -12,7 +12,7 @@ public class HelloController {
 
   @RequestMapping("/hello")
   public String hello() {
-    System.out.println("hello...");
+    System.out.println("目标方法运行了...hello...");
     return "success";
   }
 

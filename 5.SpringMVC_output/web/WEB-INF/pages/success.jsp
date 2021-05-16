@@ -16,5 +16,6 @@ pageContext: ${pageScope.msg}<br/>
 request: ${requestScope.msg}<br/>
 session: ${sessionScope.msg}--${sessionScope.haha}<br/>
 application: ${applicationScope.msg}<br/>
+<%System.out.println("来到页面了...");%>
 </body>
 </html>
