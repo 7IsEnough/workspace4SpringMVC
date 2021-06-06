@@ -2,10 +2,12 @@ package com.clearlove.controller;
 
 import com.clearlove.bean.Book;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 测试ModelAttribute注解：
@@ -69,7 +71,10 @@ public class ModelAttributeTestController {
    * @return
    */
   @RequestMapping("/updateBook")
-  public String updateBook(@ModelAttribute("book") Book book, Map<String, Object> model) {
+  public String updateBook(@RequestParam(value = "author") String author,
+      Map<String, Object> model,
+      HttpServletRequest request,
+      @ModelAttribute("book") Book book) {
     o2 = model;
     b2 = book;
     Object object = model.get("book");
