@@ -4,10 +4,10 @@ import com.clearlove.bean.Book;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
  * 测试ModelAttribute注解：
@@ -52,6 +52,13 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author promise
  * @date 2021/5/12 - 22:24
  */
+//@SessionAttributes("haha")
+/** 最好不要使用
+ *      1.为了避免可能引发的异常
+ *          保证两点：
+ *             1) 要么隐含模型中有@SessionAttributes标注的属性；
+ *             2) 如果隐含模型中没有，session说有就一定要有，否则抛异常
+ */
 @Controller
 public class ModelAttributeTestController {
 
@@ -74,7 +81,7 @@ public class ModelAttributeTestController {
   public String updateBook(@RequestParam(value = "author") String author,
       Map<String, Object> model,
       HttpServletRequest request,
-      @ModelAttribute("book") Book book) {
+      @ModelAttribute("haha") Book book) {
     o2 = model;
     b2 = book;
     Object object = model.get("book");
@@ -104,9 +111,12 @@ public class ModelAttributeTestController {
    *        2) 将这个图书信息保存起来(方便下一个方法还能使用)
    *
    * 参数的map：BindingAwareModelMap
-   *
+   * @ModelAttribute 标注的方法会提前运行，并把方法的运行结果放在隐含模型中
+   *    放的时候会使用一个Key;
+   *        如果@ModelAttribute("book")指定了，就用指定的book；
+   *        如果没指定就用返回值类型的首字母小写作为key
    */
-  @ModelAttribute
+  @ModelAttribute("haha")
   public void hahaMyModelAttribute(Map<String, Object> map) {
     Book book = new Book(100, "西游记", "吴承恩", 98, 10, 98.98);
     System.out.println("数据库中查到的信息是：" + book);
@@ -114,6 +124,7 @@ public class ModelAttributeTestController {
     b1 = book;
     o1 = map;
     System.out.println("modelAttribute方法。。。查询了图书并保存了...使用map的类型：" + map.getClass());
+//    return book;
   }
 
 }
