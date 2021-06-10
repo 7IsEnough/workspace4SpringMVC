@@ -11,6 +11,8 @@
     <title>$Title$</title>
   </head>
   <body>
-  <a href="hello">Hello<a/>
+  <a href="hello">Hello<a/><br/>
+  <a href="handle01">handle01-来到hello页面<a/><br/>
+  <a href="handle03">handle03-重定向到hello页面<a/><br/>
   </body>
 </html>
