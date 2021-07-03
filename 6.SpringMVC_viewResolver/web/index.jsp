@@ -15,5 +15,6 @@
   <a href="success">Success<a/><br/>
   <a href="handle01">handle01-来到hello页面<a/><br/>
   <a href="handle03">handle03-重定向到hello页面<a/><br/>
+    <a href="handleplus">下载资源</a>
   </body>
 </html>
