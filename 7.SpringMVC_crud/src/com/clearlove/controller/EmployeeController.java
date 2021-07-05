@@ -1,5 +1,6 @@
 package com.clearlove.controller;
 
+import com.clearlove.bean.Department;
 import com.clearlove.bean.Employee;
 import com.clearlove.dao.DepartmentDao;
 import com.clearlove.dao.EmployeeDao;
@@ -7,6 +8,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -43,6 +45,23 @@ public class EmployeeController {
     return "add";
   }
 
+  @RequestMapping(value = "/emp/{id}", method = RequestMethod.GET)
+  public String getEmp(@PathVariable Integer id, Model model) {
+    // 1.查出员工信息
+    Employee employee = employeeDao.get(id);
+    // 2.放在请求域中
+    model.addAttribute("employee", employee);
+    // 3.继续查出部门信息
+    Collection<Department> departments = departmentDao.getDepartments();
+    model.addAttribute("depts", departments);
+    return "edit";
+  }
+
+  /**
+   * 保存员工
+   * @param employee
+   * @return
+   */
   @RequestMapping(value = "/emp", method = RequestMethod.POST)
   public String addEmp(Employee employee) {
     System.out.println("要添加的员工：" + employee);
