@@ -8,9 +8,11 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author promise
@@ -45,6 +47,12 @@ public class EmployeeController {
     return "add";
   }
 
+  /**
+   * 查询员工，来到修改页面回显
+   * @param id
+   * @param model
+   * @return
+   */
   @RequestMapping(value = "/emp/{id}", method = RequestMethod.GET)
   public String getEmp(@PathVariable Integer id, Model model) {
     // 1.查出员工信息
@@ -69,5 +77,29 @@ public class EmployeeController {
     // 返回列表页面；重定向到查询所有员工的请求
     return "redirect:/emps";
   }
+
+  @RequestMapping(value = "/emp/{id}", method = RequestMethod.PUT)
+  public String updateEmp(@ModelAttribute("employee") Employee employee) {
+    System.out.println("要修改的员工：" + employee);
+    // 更新保存二合一
+    employeeDao.save(employee);
+    return "redirect:/emps";
+  }
+
+  @RequestMapping(value = "/emp/{id}", method = RequestMethod.DELETE)
+  public String deleteEmp(@PathVariable("id") Integer id) {
+    employeeDao.delete(id);
+    return "redirect:/emps";
+  }
+
+  @ModelAttribute
+  public void myModelAttribute(@RequestParam(value = "id", required = false) Integer id, Model model) {
+    if(id != null) {
+      Employee employee = employeeDao.get(id);
+      model.addAttribute("employee", employee);
+    }
+  }
+
+
 
 }

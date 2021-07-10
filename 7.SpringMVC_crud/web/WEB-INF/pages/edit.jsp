@@ -10,11 +10,16 @@
 <html>
 <head>
     <title>Title</title>
+    <%
+        pageContext.setAttribute("ctp", request.getContextPath());
+    %>
 </head>
 <body>
 <h1>员工修改页面</h1>
 <%--modelAttribute:这个表单中所有内容显示绑定的是请求域中的employee的值--%>
-<form:form action="" modelAttribute="employee">
+<form:form action="${ctp}/emp/${employee.id}" modelAttribute="employee" method="post">
+    <input type="hidden" name="_method" value="put">
+    <input type="hidden" name="id" value="${employee.id}">
     email:<form:input path="email"/><br/>
     gender:&nbsp;&nbsp;&nbsp;
     男：<form:radiobutton path="gender" value="1"/>&nbsp;&nbsp;&nbsp;
