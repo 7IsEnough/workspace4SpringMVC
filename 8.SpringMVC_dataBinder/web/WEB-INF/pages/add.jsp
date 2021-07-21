@@ -40,6 +40,7 @@
     gender:<br/>
         男：<form:radiobutton path="gender" value="1"/><br/>
         女：<form:radiobutton path="gender" value="0"/><br/>
+    birth:<form:input path="birth"/><br/>
     dept:
         <%--
             items:指定要遍历的集合，自动遍历，遍历出的元素是一个department对象
