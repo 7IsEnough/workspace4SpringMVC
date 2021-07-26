@@ -5,9 +5,15 @@ import com.clearlove.bean.Employee;
 import com.clearlove.dao.DepartmentDao;
 import com.clearlove.dao.EmployeeDao;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -90,11 +96,28 @@ public class EmployeeController {
    * @return
    */
   @RequestMapping(value = "/emp", method = RequestMethod.POST)
-  public String addEmp(Employee employee) {
+  public String addEmp(@Validated Employee employee, BindingResult result, Model model) {
     System.out.println("要添加的员工：" + employee);
-    employeeDao.save(employee);
-    // 返回列表页面；重定向到查询所有员工的请求
-    return "redirect:/emps";
+    // 获取是否有校验错误
+    boolean hasErrors = result.hasErrors();
+    if (hasErrors) {
+      List<FieldError> fieldErrors = result.getFieldErrors();
+      Map<String, Object> errorsMap = new HashMap<>();
+      for (FieldError fieldError : fieldErrors) {
+        System.out.println("错误消息提示：" + fieldError.getDefaultMessage());
+        System.out.println("错误的字段是？：" + fieldError.getField());
+        System.out.println(fieldError);
+        System.out.println("-------------------");
+        errorsMap.put(fieldError.getField(), fieldError.getDefaultMessage());
+      }
+      model.addAttribute("errorInfo", errorsMap);
+      System.out.println("有校验错误");
+      return "add";
+    }else {
+      employeeDao.save(employee);
+      // 返回列表页面；重定向到查询所有员工的请求
+      return "redirect:/emps";
+    }
   }
 
   @RequestMapping(value = "/emp/{id}", method = RequestMethod.PUT)
