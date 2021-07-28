@@ -138,6 +138,7 @@ public class EmployeeController {
   public void myModelAttribute(@RequestParam(value = "id", required = false) Integer id, Model model) {
     if(id != null) {
       Employee employee = employeeDao.get(id);
+      model.addAttribute("depts", departmentDao.getDepartments());
       model.addAttribute("employee", employee);
     }
   }
