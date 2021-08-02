@@ -1,5 +1,7 @@
 package com.clearlove.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
@@ -10,7 +12,7 @@ import org.springframework.format.annotation.NumberFormat;
 public class Employee {
 
   private Integer id;
-  @NotEmpty
+  @NotEmpty(message = "不能为空")
   @Length(min = 6, max = 18)
   private String lastName;
 
@@ -23,12 +25,14 @@ public class Employee {
   // @Past：必须是一个过去的时间
   // @Future：必须是一个未来的时间
   @DateTimeFormat(pattern = "yyyy-MM-dd")
-  private Date birth;
+  @JsonFormat(pattern = "yyyy-MM-dd")
+  private Date birth = new Date();
 
   // 假设页面，为了显示方便提交的工资是￥10,000.98
   @NumberFormat(pattern = "#,###,###.####")
   private Double salary;
 
+  @JsonIgnore
   private Department department;
 
   public Integer getId() {
