@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:mvc="http://www.springframework.org/schema/mvc"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+  <context:component-scan base-package="com.clearlove"></context:component-scan>
+
+  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="prefix" value="/WEB-INF/pages/"></property>
+    <property name="suffix" value=".jsp"></property>
+  </bean>
+
+  <!--默认前端控制器是拦截所有资源(除了jsp)，js文件就404了；js文件是交给tomcat处理的-->
+  <!--告诉SpringMVC，自己映射的请求就自己处理，不能处理的请求直接交给tomcat-->
+  <!--静态资源能访问，动态映射的请求就不行-->
+  <mvc:default-servlet-handler/>
+  <!--保证springmvc动态请求和静态请求的访问-->
+  <!--conversion-service="conversionService": 使用我们自己配置的类型转换组件-->
+  <mvc:annotation-driven/>
+
+  <!--配置文件上传解析器 id必须是multipartResolver-->
+  <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <property name="maxUploadSize" value="20971520"></property>
+    <!--设置默认的编码-->
+    <property name="defaultEncoding" value="utf-8"></property>
+  </bean>
+
+
+</beans>
