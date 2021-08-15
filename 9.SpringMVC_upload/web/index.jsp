@@ -41,6 +41,9 @@
   ${msg}
   <form action="${ctp}/upload" method="post" enctype="multipart/form-data">
     用户头像：<input name="headerimg" type="file"> <br/>
+    用户头像：<input name="headerimg" type="file"> <br/>
+    用户头像：<input name="headerimg" type="file"> <br/>
+    用户头像：<input name="headerimg" type="file"> <br/>
     用户名：<input name="username" type="text"> <br/>
     <input type="submit">
   </form>

@@ -16,21 +16,53 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class FileUploadController {
 
+//  @RequestMapping(value = "/upload", method = RequestMethod.POST)
+//  public String upload(
+//      @RequestParam(value = "username", required = false) String username,
+//      @RequestParam("headerimg") MultipartFile file,
+//      Model model) {
+//    System.out.println("上传的文件信息：");
+//    System.out.println("文件项的name：" + file.getName());
+//    System.out.println("文件的名字：" + file.getOriginalFilename());
+//
+//    // 文件保存
+//    try {
+//      file.transferTo(new File("F:\\" + file.getOriginalFilename()));
+//      model.addAttribute("msg", "文件上传成功了");
+//    } catch (Exception e) {
+//      model.addAttribute("msg", "文件上传失败了！" + e.getMessage());
+//    }
+//
+//    return "forward:/index.jsp";
+//  }
+
+
+  /**
+   * 多文件上传
+   * @param username
+   * @param file
+   * @param model
+   * @return
+   */
   @RequestMapping(value = "/upload", method = RequestMethod.POST)
   public String upload(
       @RequestParam(value = "username", required = false) String username,
-      @RequestParam("headerimg") MultipartFile file,
+      @RequestParam("headerimg") MultipartFile[] file,
       Model model) {
     System.out.println("上传的文件信息：");
-    System.out.println("文件项的name：" + file.getName());
-    System.out.println("文件的名字：" + file.getOriginalFilename());
+    for (MultipartFile multipartFile : file) {
+      if(!multipartFile.isEmpty()) {
+        // 文件保存
+        try {
+          multipartFile.transferTo(new File("F:\\" + multipartFile.getOriginalFilename()));
+          model.addAttribute("msg", "文件上传成功了");
 
-    // 文件保存
-    try {
-      file.transferTo(new File("F:\\" + file.getOriginalFilename()));
-      model.addAttribute("msg", "文件上传成功了");
-    } catch (Exception e) {
-      model.addAttribute("msg", "文件上传失败了！" + e.getMessage());
+          System.out.println("文件项的name：" + multipartFile.getName());
+          System.out.println("文件的名字：" + multipartFile.getOriginalFilename());
+        } catch (Exception e) {
+          model.addAttribute("msg", "文件上传失败了！" + e.getMessage());
+        }
+      }
     }
 
     return "forward:/index.jsp";
