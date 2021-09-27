@@ -15,6 +15,6 @@
     pageContext.setAttribute("ctp", request.getContextPath());
   %>
   <body>
-  <a href="${ctp}/handle01?i=10">test01-哈哈</a>
+  <a href="${ctp}/handle01?i=0">test01-哈哈</a>
   </body>
 </html>
