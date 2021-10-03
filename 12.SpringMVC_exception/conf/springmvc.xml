@@ -20,7 +20,17 @@
   <!--conversion-service="conversionService": 使用我们自己配置的类型转换组件-->
   <mvc:annotation-driven/>
 
-
+  <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+    <!--exceptionMappings：配置那些异常去哪些页面-->
+    <property name="exceptionMappings">
+      <props>
+        <!--key: 异常全类名  value: 要去的页面视图名-->
+        <prop key="java.lang.NullPointerException">myerror</prop>
+      </props>
+    </property>
+    <!--指定错误信息取出时使用的key-->
+    <property name="exceptionAttribute" value="ex"></property>
+  </bean>
 
 
 

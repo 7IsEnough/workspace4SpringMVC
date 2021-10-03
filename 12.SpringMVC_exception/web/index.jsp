@@ -16,5 +16,8 @@
   %>
   <body>
   <a href="${ctp}/handle01?i=0">test01-哈哈</a>
+  <a href="${ctp}/handle02?username=admin">handle02</a>
+  <a href="${ctp}/handle03">handle03</a>
+  <a href="${ctp}/handle04">handle04</a>
   </body>
 </html>

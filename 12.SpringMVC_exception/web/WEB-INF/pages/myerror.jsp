@@ -12,6 +12,6 @@
 </head>
 <body>
 <h1>出错了！</h1>
-<h2>错误信息：${ex}</h2>
+<h2>错误信息：${ex}-${exception}</h2>
 </body>
 </html>
