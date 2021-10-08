@@ -32,6 +32,8 @@
     <property name="exceptionAttribute" value="ex"></property>
   </bean>
 
+  <import resource="springmvc.xml"></import>
+
 
 
 </beans>
